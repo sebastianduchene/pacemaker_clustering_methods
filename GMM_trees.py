@@ -151,3 +151,16 @@ def fit_DPGMM(br_matrix, svd_transform = False, standard_matrix = False):
     results_matrix.columns = ['covariance_type', 'BIC', 'clusters_used', 'n_components']
 
     return [diag_best, spher_best, results_matrix]
+    
+    
+def simulate_data(fit_data, n_comp, cov_type, n_sims):
+    
+    from sklearn import mixture
+    
+    model_fit = mixture.GMM(n_components = n_comp, covariance_type = cov_type).fit(fit_data)
+    
+    sim_datasets = []
+    for i in range(n_sims):
+        sim_datasets.append(model_fit.sample(fit_data.shape[0]))
+        
+    return sim_datasets
