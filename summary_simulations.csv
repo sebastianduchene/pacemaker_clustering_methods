@@ -1,0 +1,6 @@
+,data_set,model_mode,model_prob,k_mode,k_prob
+0,Angiosperms,vbgmm_shperical,1.0,1.0,1.0
+1,Angiosperms,vbgmm_shperical,1.0,2.0,1.0
+2,Eudicots,vbgmm_shperical,1.0,2.0,1.0
+3,Asteraceae,vbgmm_shperical,1.0,3.0,0.6
+4,rosids,vbgmm_shperical,1.0,2.0,0.9

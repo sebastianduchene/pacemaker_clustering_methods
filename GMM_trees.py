@@ -164,3 +164,45 @@ def simulate_data(fit_data, n_comp, cov_type, n_sims):
         sim_datasets.append(model_fit.sample(fit_data.shape[0]))
         
     return sim_datasets
+
+def unlist(nested_list):
+    if any([type(i) == list for i in nested_list]):
+        out_list = list()
+        for e in nested_list:
+            if type(e) == list:
+                for s in e:
+                    out_list.append(s)
+            else:
+                out_list.append(e)
+        return out_list
+    else: 
+        return nested_list
+        
+
+def fit_sim_models(simulated_data):
+    results_mat = pd.DataFrame(np.empty(shape = (len(simulated_data), 2)))
+
+    for i in range(len(simulated_data)):
+        fit_temp_vbgmm = fit_VBGMM(simulated_data[i])
+        fit_temp_dpp = fit_DPGMM(simulated_data[i])
+
+        run_models = unlist([fit_temp_vbgmm[:2], fit_temp_dpp[:2]])
+        models_order = np.hstack([fit_temp_vbgmm[2]['BIC'], fit_temp_dpp[2]['BIC']]).argsort()
+        best_model = run_models[models_order[0]]
+
+        k_best_model = len(set(best_model.predict(simulated_data[i])))
+        name_best_model = ['vbgmm_diag', 'vbgmm_shperical', 'dpp_diag', 'dpp_spherical'][models_order[0]]
+    
+        results_mat.ix[i, :] = [name_best_model, k_best_model]
+
+    return results_mat
+    
+def get_mode(data_list):
+    from scipy import stats
+
+    freqs = stats.itemfreq(data_list)
+    freqs_sorted = freqs[(-freqs[:, 1]).argsort()]
+    best_model = freqs_sorted[0, 0]
+    prob_model = freqs_sorted[0, 1] / float(freqs_sorted[:, 1].sum())
+
+    return [best_model, round(prob_model, 2)]
