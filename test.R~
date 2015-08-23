@@ -1,0 +1,5 @@
+
+
+ars <- commandArgs(trailingOnly = FALSE)
+
+print(ars)
