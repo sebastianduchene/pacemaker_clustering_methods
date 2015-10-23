@@ -7,7 +7,8 @@ from sklearn import mixture
 import scipy.stats as sp
 from GMM_trees import *
 import itertools
-
+import multiprocessing
+from multiprocessing import Pool
 
 def rescale_data(br_matrix):
     mat_scaled = np.empty(shape = br_matrix.shape)
@@ -185,7 +186,7 @@ def fit_sim_models(simulated_data):
     for i in range(len(simulated_data)):
         fit_temp_vbgmm = fit_VBGMM(simulated_data[i])
         fit_temp_dpp = fit_DPGMM(simulated_data[i])
-
+        print 'fitting data set '+str(i)
         run_models = unlist([fit_temp_vbgmm[:2], fit_temp_dpp[:2]])
         models_order = np.hstack([fit_temp_vbgmm[2]['BIC'], fit_temp_dpp[2]['BIC']]).argsort()
         best_model = run_models[models_order[0]]
@@ -197,6 +198,28 @@ def fit_sim_models(simulated_data):
 
     return results_mat
     
+def fit_sim_models_DEPRECATED(simulated_data):
+
+    def fit_data(i):
+        fit_temp_vbgmm = fit_VBGMM(simulated_data[i])
+        fit_temp_dpp = fit_DPGMM(simulated_data[i])
+    
+        run_models = unlist([fit_temp_vbgmm[:2], fit_temp_dpp[:2]])
+        models_order = np.hstack([fit_temp_vbgmm[2]['BIC'], fit_temp_dpp[2]['BIC']]).argsort()
+        best_model = run_models[models_order[0]]
+
+        k_best_model = len(set(best_model.predict(simulated_data[i])))
+        name_best_model = ['vbgmm_diag', 'vbgmm_shperical', 'dpp_diag', 'dpp_spherical'][models_order[0]]
+    
+        return [name_best_model, k_best_model]
+
+    p = Pool(6)
+    i_s = [x for x in range(len(simulated_data))]
+    out = p.map(fit_data, i_s)
+
+    return out
+
+
 def get_mode(data_list):
     from scipy import stats
 
