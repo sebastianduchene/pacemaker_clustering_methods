@@ -19,7 +19,7 @@ samples_temp_8 = simulate_data(mm_dat, 8, 'spherical', 100)
 for i in range(len(samples_temp_8)):
     pd.DataFrame(samples_temp_8[i]).to_csv('sim_mammals_8/sim_'+str(i)+'.csv')
 
-
+print 'fitting mammals 8'
 mm_sims_8 = fit_sim_models(samples_temp_8)
 mm_sims_8.to_csv('mm_sims_8.csv')
 
