@@ -14,6 +14,7 @@ from multiprocessing import Pool
 execfile('GMM_trees.py')
 
 # Simulate 100 data sets
+mm_dat = pd.DataFrame(rescale_data(np.array(pd.read_csv('mammal_matrix.csv'))))
 samples_temp_2 = simulate_data(mm_dat, 2, 'spherical', 100)
 for i in range(len(samples_temp_2)):
     pd.DataFrame(samples_temp_2[i]).to_csv('sim_mammals_2/sim_'+str(i)+'.csv')
@@ -48,7 +49,7 @@ def fit_data(s_data):
     return [name_best_model, k_best_model]
     
 
-p = Pool(4)
+p = Pool(7)
 s = p.map(fit_data, samples_temp_2)
 
 mm_sims_2 = fit_sim_models(samples_temp_2)
