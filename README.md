@@ -23,7 +23,7 @@ This repository contains:
 - [Python script with functions to fit genome pacemakers](https://github.com/sebastianduchene/pacemaker_clustering_methods/blob/master/GMM_trees.py)
 
     
-- [Example code to fit pacemakers to the plant data sets](https://github.com/sebastianduchene/pacemaker_clustering_methods/blob/master/Example_asteraceae.ipynb)
+- [Example code to fit pacemakers to the plant data sets](/Example_asteraceae.ipynb)
 
 
 - [Example code to simulate data from mixture models and validate results]()
