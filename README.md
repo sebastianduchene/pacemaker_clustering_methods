@@ -7,17 +7,17 @@ This repository contains:
 
 - Empirical data sets used in the paper. These correspond to matrices in which the rows are different genes, and the columns are the branch lengths for the maximum likelihood tree topology
 
-       - Angiosperms
+       - [Angiosperms](https://github.com/sebastianduchene/pacemaker_clustering_methods/blob/master/empirical_datasets/angiosperm_matrix.csv)
 
-       - Poaceae
+       - [Poaceae](https://github.com/sebastianduchene/pacemaker_clustering_methods/blob/master/empirical_datasets/poaceae_matrix.csv)
 
-       - Eudicots
+       - [Eudicots](https://github.com/sebastianduchene/pacemaker_clustering_methods/blob/master/empirical_datasets/eudicot_matrix.csv)
 
-       - Asteraceae
+       - [Asteraceae](https://github.com/sebastianduchene/pacemaker_clustering_methods/blob/master/empirical_datasets/asteraceae_matrix.csv)
 
-       - Rosids
+       - [Rosids](https://github.com/sebastianduchene/pacemaker_clustering_methods/blob/master/empirical_datasets/rosids_matrix.csv)
 
-       - Mammals
+       - [Mammals](https://github.com/sebastianduchene/pacemaker_clustering_methods/blob/master/empirical_datasets/mammal_matrix.csv)
 
 
 - [Python script with functions to fit genome pacemakers]()
