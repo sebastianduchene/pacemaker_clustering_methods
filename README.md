@@ -5,7 +5,7 @@ Duchene, Foster, and Ho. Estimating the number and assignment of clock models in
 
 This repository contains:
 
-     - Empirical data sets used in the paper. These correspond to matrices in which the rows are different genes, and the columns are the branch lengths for the maximum likelihood tree topology
+- Empirical data sets used in the paper. These correspond to matrices in which the rows are different genes, and the columns are the branch lengths for the maximum likelihood tree topology
 
        - Angiosperms
 
@@ -20,11 +20,12 @@ This repository contains:
        - Mammals
 
 
-    - [Python script with functions to fit genome pacemakers]()
+- [Python script with functions to fit genome pacemakers]()
 
     
-    - [Example code to fit pacemakers to the plant data sets]()
+- [Example code to fit pacemakers to the plant data sets]()
 
-    - [Example code to simulate data from mixture models and validate results]()
+
+- [Example code to simulate data from mixture models and validate results]()
 
 
