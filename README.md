@@ -20,7 +20,7 @@ This repository contains:
        - [Mammals](https://github.com/sebastianduchene/pacemaker_clustering_methods/blob/master/empirical_datasets/mammal_matrix.csv)
 
 
-- [Python script with functions to fit genome pacemakers]()
+- [Python script with functions to fit genome pacemakers](https://github.com/sebastianduchene/pacemaker_clustering_methods/blob/master/GMM_trees.py)
 
     
 - [Example code to fit pacemakers to the plant data sets]()
