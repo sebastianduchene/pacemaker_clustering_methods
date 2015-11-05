@@ -26,6 +26,6 @@ This repository contains:
 - [Example code to fit pacemakers to the plant data sets](/Example_asteraceae.ipynb)
 
 
-- [Example code to simulate data from mixture models and validate results]()
+- [Example code to simulate data from mixture models and validate results](/simulation_example.ipynb)
 
 
