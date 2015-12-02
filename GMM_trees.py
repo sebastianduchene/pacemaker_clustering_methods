@@ -242,7 +242,7 @@ def make_pam_sims(data, model, reps):
             cluster_means = [np.mean(data.ix[:, i]) for i in range(data.shape[1])]
             cluster_sd = [np.std(data.ix[:, i]) for i in range(data.shape[1])]
             for d in range(len(cluster_means)):
-                data_sims.ix[:, d] = np.random.normal(size = data_sims.shape[0], loc = cluster_means[d], scale = cluster_sd[d]/20)
+                data_sims.ix[:, d] = np.random.normal(size = data_sims.shape[0], loc = cluster_means[d], scale = cluster_sd[d]/10)
             sim_reps.append(data_sims)
         return sim_reps
 
@@ -255,7 +255,7 @@ def make_pam_sims(data, model, reps):
             	cluster_means = [np.mean(dat_subset.ix[:, i]) for i in range(dat_subset.shape[1])]
             	cluster_sd = [np.std(dat_subset.ix[:, i]) for i in range(dat_subset.shape[1])]
                 for d in range(len(cluster_means)):
-                    data_sims.ix[cluster_loc, d] = np.random.normal(size = cluster_loc.sum(), loc = cluster_means[d], scale = cluster_sd[d]/20) 
+                    data_sims.ix[cluster_loc, d] = np.random.normal(size = cluster_loc.sum(), loc = cluster_means[d], scale = cluster_sd[d]/10) 
             sim_reps.append(data_sims)
         return sim_reps
 
