@@ -1,0 +1,7 @@
+
+import os, sys, re
+
+files = os.listdir('sim_pam_poac')
+
+for f in files:
+    print f

@@ -186,7 +186,7 @@ def fit_sim_models(simulated_data):
     for i in range(len(simulated_data)):
         fit_temp_vbgmm = fit_VBGMM(simulated_data[i])
         fit_temp_dpp = fit_DPGMM(simulated_data[i])
-        print 'fitting data set '+i
+        print 'fitting data set '+str(i)
         run_models = unlist([fit_temp_vbgmm[:2], fit_temp_dpp[:2]])
         models_order = np.hstack([fit_temp_vbgmm[2]['BIC'], fit_temp_dpp[2]['BIC']]).argsort()
         best_model = run_models[models_order[0]]
@@ -229,3 +229,46 @@ def get_mode(data_list):
     prob_model = freqs_sorted[0, 1] / float(freqs_sorted[:, 1].sum())
 
     return [best_model, round(prob_model, 2)]
+
+
+def make_pam_sims(data, model, reps):
+    sim_reps = []
+    cluster_assignment = model.predict(data)
+    cluster_freq = sc.itemfreq(cluster_assignment)
+
+    if len(cluster_freq) == 1:
+        for n in range(reps):
+            data_sims = pd.DataFrame(np.zeros(shape = data.shape))
+            cluster_means = [np.mean(data.ix[:, i]) for i in range(data.shape[1])]
+            cluster_sd = [np.std(data.ix[:, i]) for i in range(data.shape[1])]
+            for d in range(len(cluster_means)):
+                data_sims.ix[:, d] = np.random.normal(size = data_sims.shape[0], loc = cluster_means[d], scale = cluster_sd[d]/7.5)
+            sim_reps.append(data_sims)
+        return sim_reps
+
+    elif len(cluster_freq) > 1:
+        for n in range(reps):
+            data_sims = pd.DataFrame(np.zeros(shape = data.shape))
+            for clu in cluster_freq[:, 0]:
+                cluster_loc = cluster_assignment == clu
+            	dat_subset = data.ix[cluster_loc, ]
+            	cluster_means = [np.mean(dat_subset.ix[:, i]) for i in range(dat_subset.shape[1])]
+            	cluster_sd = [np.std(dat_subset.ix[:, i]) for i in range(dat_subset.shape[1])]
+                for d in range(len(cluster_means)):
+                    data_sims.ix[cluster_loc, d] = np.random.normal(size = cluster_loc.sum(), loc = cluster_means[d], scale = cluster_sd[d]/7.5) 
+            sim_reps.append(data_sims)
+        return sim_reps
+
+
+def fit_sim_data(s_data):
+    print 'step 1'
+    fit_temp_vbgmm = fit_VBGMM(s_data)
+    fit_temp_dpp = fit_DPGMM(s_data)
+    print 'step 2'
+    run_models = unlist([fit_temp_vbgmm[:2], fit_temp_dpp[:2]])
+    models_order = np.hstack([fit_temp_vbgmm[2]['BIC'], fit_temp_dpp[2]['BIC']]).argsort()
+    best_model = run_models[models_order[0]]
+
+    k_best_model = len(set(best_model.predict(s_data)))
+    name_best_model = ['vbgmm_diag', 'vbgmm_shperical', 'dpp_diag', 'dpp_spherical'][models_order[0]]
+    return [name_best_model, k_best_model]
