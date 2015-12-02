@@ -1,0 +1,3 @@
+import re
+
+lines = open('run_mammals_2.py', 'r').read()

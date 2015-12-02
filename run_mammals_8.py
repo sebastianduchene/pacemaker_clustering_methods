@@ -14,9 +14,10 @@ from multiprocessing import Pool
 execfile('GMM_trees.py')
 
 # Simulate 100 data sets
+mm_dat = pd.DataFrame(rescale_data(np.array(pd.read_csv('mammal_matrix.csv'))))
 samples_temp = simulate_data(mm_dat, 8, 'spherical', 100)
 for i in range(len(samples_temp)):
-    pd.DataFrame(samples_temp[i]).to_csv('sim_mammals_2/sim_'+str(i)+'.csv')
+    pd.DataFrame(samples_temp[i]).to_csv('sim_mammals_8/sim_'+str(i)+'.csv')
 
 print 'fitting simulations mammals 8'
 

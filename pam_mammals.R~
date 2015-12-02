@@ -1,0 +1,13 @@
+library(cluster)
+
+scale8 <- svd(m8)
+plot(scale$u[, 1], scale$u[, 2])
+
+sims_8 <- dir('sim_mammals_8')
+
+out_sims_8 <- vector()
+for(f in sims_8){
+    m8 <- read.table(paste0('sim_mammals_8/', sims_8), sep = ',',  head  = T, row.names = 1)
+    c8 <- clusGap(m8, FUN = pam, K.max = 20, B = 20)
+    out_sims_8 <- c(out_sims_8, maxSE(c8$Tab[, 3], c8$Tab[, 4]))
+}
